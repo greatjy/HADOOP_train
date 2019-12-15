@@ -43,6 +43,8 @@ public class HDFSWCApp01 {
         }
 
         //2 从hdfs文件系统上读取文件
+        WordcountMapper handleMapper = new WordCountMapperImpl();
+        HDFSWCContext context = new HDFSWCContext();
         Path input = new Path("/test_hadoop/test_wordcount.txt");
         RemoteIterator<LocatedFileStatus> iterator = null;
         try {
@@ -54,6 +56,7 @@ public class HDFSWCApp01 {
                  String line = "";
                  while((line = reader.readLine()) != null){
                      // 进行词频处理
+                     handleMapper.map(line, context);
 
                      // 将业务逻辑处理完成之后，写入到缓存map中。
 
@@ -67,9 +70,7 @@ public class HDFSWCApp01 {
         }
 
         //@R=ToDO 3  将结果缓存起来  Map
-        HDFSWCContext context = new HDFSWCContext();
         Map<Object, Object> contextMap = context.getCacheMap();
-
 
         //4 将结果保存到hdfs文件系统上
         Path output = new Path("/test_hadoop/output/");
