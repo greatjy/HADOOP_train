@@ -25,4 +25,8 @@ public class Constant {
      * hdfs执行的用户
      */
     public static final String USER = "USER";
+    /**
+     * Mapper类的实现类
+     */
+    public static final String MapperClass="MAPPER_CLASS";
 }

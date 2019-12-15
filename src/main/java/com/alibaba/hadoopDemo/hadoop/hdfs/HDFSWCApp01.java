@@ -57,7 +57,21 @@ public class HDFSWCApp01 {
         }
 
         //2 从hdfs文件系统上读取文件
-        WordcountMapper handleMapper = new WordCountMapperImpl();
+        // WordcountMapper handleMapper = new WordCountMapperImpl();
+        Class wordCountMapperClass = null;
+        WordcountMapper handleMapper = null;
+        try {
+            wordCountMapperClass = Class.forName(properties.getProperty(Constant.MapperClass));
+            handleMapper = (WordcountMapper) wordCountMapperClass.newInstance();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
         HDFSWCContext context = new HDFSWCContext();
         Path input = inPath;
         RemoteIterator<LocatedFileStatus> iterator = null;
