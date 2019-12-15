@@ -55,6 +55,8 @@ public class HDFSWCApp01 {
                  while((line = reader.readLine()) != null){
                      // 进行词频处理
 
+                     // 将业务逻辑处理完成之后，写入到缓存map中。
+
                  }
                  reader.close();
                  in.close();
@@ -65,7 +67,8 @@ public class HDFSWCApp01 {
         }
 
         //@R=ToDO 3  将结果缓存起来  Map
-        Map<Object, Object> contextMap = new HashMap<>();
+        HDFSWCContext context = new HDFSWCContext();
+        Map<Object, Object> contextMap = context.getCacheMap();
 
 
         //4 将结果保存到hdfs文件系统上
