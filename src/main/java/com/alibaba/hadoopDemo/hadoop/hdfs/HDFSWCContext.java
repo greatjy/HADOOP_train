@@ -21,7 +21,7 @@ public class HDFSWCContext {
      * @param key   单词
      * @param value 词频
      */
-    public void writeToCache(Object key, Object value) {
+    public void setCacheMap(Object key, Object value) {
         cacheMap.put(key, value);
     }
 
@@ -31,7 +31,7 @@ public class HDFSWCContext {
      * @param key 单词
      * @return
      */
-    public Object readFromCache(Object key) {
+    public Object getCache(Object key) {
         return cacheMap.get(key);
     }
 
