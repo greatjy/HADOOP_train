@@ -13,7 +13,7 @@ public class WordCountMapperImpl implements WordcountMapper {
      */
     @Override
     public void map(String line, HDFSWCContext context) {
-         String[] words = line.split(" ");
+         String[] words = line.toLowerCase().split(" ");
          for(String word : words){
              if(context.getCacheMap().containsKey(word)){
                  int count = Integer.parseInt(context.getCache(word).toString());
