@@ -1,8 +1,12 @@
 package com.alibaba.hadoopDemo.hadoop.hdfs;
 
+import com.alibaba.hadoopDemo.hadoop.ParameterUtils;
+import org.apache.bcel.Const;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
+import org.omg.Dynamic.Parameter;
 
+import java.beans.PropertyEditor;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -32,8 +37,17 @@ public class HDFSWCApp01 {
         Configuration configuration = new Configuration();
         configuration.set("dfs.replication", "1");
         FileSystem fileSystem = null;
+        Properties properties = null;
+        Path inPath = null;
         try {
-            fileSystem = FileSystem.get(new URI("hdfs://192.168.18.136:8020"), configuration, "root");
+            properties = ParameterUtils.getProperties();
+            inPath = new Path(properties.getProperty(Constant.INPUT_PATH));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            fileSystem = FileSystem.get(new URI(properties.getProperty(Constant.HDFS_URI)), configuration,
+                    properties.getProperty(Constant.USER));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -45,7 +59,7 @@ public class HDFSWCApp01 {
         //2 从hdfs文件系统上读取文件
         WordcountMapper handleMapper = new WordCountMapperImpl();
         HDFSWCContext context = new HDFSWCContext();
-        Path input = new Path("/test_hadoop/test_wordcount.txt");
+        Path input = inPath;
         RemoteIterator<LocatedFileStatus> iterator = null;
         try {
              iterator = fileSystem.listFiles(input, false);
@@ -73,9 +87,9 @@ public class HDFSWCApp01 {
         Map<Object, Object> contextMap = context.getCacheMap();
 
         //4 将结果保存到hdfs文件系统上
-        Path output = new Path("/test_hadoop/output/");
-        try {
-            FSDataOutputStream out = fileSystem.create(new Path(output,"word_count.txt"));
+        Path output = new Path(properties.getProperty(Constant.OUTPUT_PATH));
+            try {
+            FSDataOutputStream out = fileSystem.create(new Path(output,properties.getProperty(Constant.OUTPUT_NAME)));
             Set<Map.Entry<Object, Object>> entries = contextMap.entrySet();
             for(Map.Entry entry : entries){
                 out.writeChars(entry.getKey()+" : "+entry.getValue()+"\n");
