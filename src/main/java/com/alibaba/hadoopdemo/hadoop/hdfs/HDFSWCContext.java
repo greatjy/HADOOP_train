@@ -1,4 +1,4 @@
-package com.alibaba.hadoopDemo.hadoop.hdfs;
+package com.alibaba.hadoopdemo.hadoop.hdfs;
 
 import java.util.HashMap;
 import java.util.Map;

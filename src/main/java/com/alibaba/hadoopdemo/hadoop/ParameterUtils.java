@@ -1,4 +1,4 @@
-package com.alibaba.hadoopDemo.hadoop;
+package com.alibaba.hadoopdemo.hadoop;
 
 import java.util.Properties;
 

@@ -1,19 +1,14 @@
-package com.alibaba.hadoopDemo.hadoop.hdfs;
+package com.alibaba.hadoopdemo.hadoop.hdfs;
 
-import com.alibaba.hadoopDemo.hadoop.ParameterUtils;
-import org.apache.bcel.Const;
+import com.alibaba.hadoopdemo.hadoop.ParameterUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
-import org.omg.Dynamic.Parameter;
 
-import java.beans.PropertyEditor;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;

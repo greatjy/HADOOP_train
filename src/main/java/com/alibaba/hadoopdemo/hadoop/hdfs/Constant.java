@@ -1,4 +1,4 @@
-package com.alibaba.hadoopDemo.hadoop.hdfs;
+package com.alibaba.hadoopdemo.hadoop.hdfs;
 
 /**
  * @Author: wjy
