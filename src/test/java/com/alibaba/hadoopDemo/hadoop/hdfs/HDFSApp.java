@@ -1,9 +1,7 @@
-package com.alibaba.hadoopDemo.hadoop.hdfs;
+package com.alibaba.hadoopdemo.hadoop.hdfs;
 
-import org.apache.commons.lang3.builder.ToStringExclude;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
-import org.apache.hadoop.fs.permission.FsPermission;
 import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.util.Progressable;
 import org.junit.After;
