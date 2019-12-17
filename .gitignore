@@ -25,3 +25,6 @@ hs_err_pid*
 /ouput/output/*
 /output/*
 output/
+!/ouput/
+/ouput/
+/ouput/access/
