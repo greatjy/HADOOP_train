@@ -23,7 +23,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
         String[] words = value.toString().split(" ");
         // 将单词写成key ; 1的形式，剩下的交给reduce来处理
         for(String word : words){
-            context.write(new Text(word), new IntWritable(1));
+            context.write(new Text(word.toLowerCase()), new IntWritable(1));
         }
     }
 }

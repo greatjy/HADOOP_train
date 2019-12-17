@@ -1,6 +1,7 @@
 package com.alibaba.hadoopdemo.hadoop.mapreduce.wordcount;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -9,6 +10,8 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * @Author: wjy
@@ -43,8 +46,22 @@ public class WordCountApp {
             job.setOutputValueClass(IntWritable.class);
 
             //需要得到作业输入文件和输出文件的路径,输入路径可以有多个
+            Path outputPath = new Path("/wordcount/output");
             FileInputFormat.setInputPaths(job, new Path("/wordcount/input"));
-            FileOutputFormat.setOutputPath(job, new Path("/wordcount/output"));
+            FileOutputFormat.setOutputPath(job, outputPath);
+
+            //如果输出目录存在，则先递归删除这个目录
+            FileSystem fileSystem = null;
+
+            try {
+                fileSystem = FileSystem.get(new URI("hdfs://192.168.18.136:8020"), configuration, "root");
+                if(fileSystem.exists(outputPath)){
+                    fileSystem.delete(outputPath, true);
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             //提交job
             boolean result = false;
@@ -61,6 +78,8 @@ public class WordCountApp {
 
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
