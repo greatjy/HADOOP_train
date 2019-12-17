@@ -17,6 +17,14 @@ public class Access implements Writable {
     private long downloadFlow;
     private long totalFlow;
 
+    public Access(){}
+
+    public Access(String phoneNumber, long upwardFlow, long downloadFlow) {
+        this.phoneNumber = phoneNumber;
+        this.upwardFlow = upwardFlow;
+        this.downloadFlow = downloadFlow;
+        this.totalFlow = upwardFlow + downloadFlow;
+    }
 
     @Override
     public void write(DataOutput out) throws IOException {
