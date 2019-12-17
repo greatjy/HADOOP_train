@@ -30,8 +30,9 @@ public class WordCountLocalApp {
             job = Job.getInstance(configuration);
             job.setJarByClass(WordCountLocalApp.class);
 
-            // 设置自定义的mapper 和 reducer
+            // 设置自定义的mapper 和 reducer 和 combiner
             job.setMapperClass(WordCountMapper.class);
+            job.setCombinerClass(WordCountReducer.class);
             job.setReducerClass(WordCountReducer.class);
 
             //设置map的输出类型 也就是reduce的输入类型
@@ -42,9 +43,11 @@ public class WordCountLocalApp {
             job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(IntWritable.class);
 
+            Path outputPath = new Path("output");
             //需要得到作业输入文件和输出文件的路径,输入路径可以有多个
             FileInputFormat.setInputPaths(job, new Path("input"));
-            FileOutputFormat.setOutputPath(job, new Path("output"));
+            FileOutputFormat.setOutputPath(job, outputPath);
+
 
             //提交job
             boolean result = false;
