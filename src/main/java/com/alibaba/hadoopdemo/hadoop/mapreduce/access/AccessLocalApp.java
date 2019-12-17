@@ -30,6 +30,10 @@ public class AccessLocalApp {
             job.setMapperClass(AccessMapper.class);
             job.setReducerClass(AccessReducer.class);
 
+            //按照自定义需求设置partition
+            job.setPartitionerClass(AccessPartitioner.class);
+            job.setNumReduceTasks(4);
+
             //设置mapper 和 reducer的输出
             job.setMapOutputKeyClass(Text.class);
             job.setMapOutputValueClass(Access.class);
@@ -38,7 +42,7 @@ public class AccessLocalApp {
 
             //设置输入输出的路径
             FileInputFormat.setInputPaths(job, new Path("input/access/access.log"));
-            FileOutputFormat.setOutputPath(job, new Path("ouput/access/"));
+            FileOutputFormat.setOutputPath(job, new Path("output/access/"));
 
         } catch (IOException e) {
             e.printStackTrace();
