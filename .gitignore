@@ -25,4 +25,5 @@ hs_err_pid*
 .idea/workspace.xml
 output/
 hadoop_train.iml
+input/trackinfo_20130721.data
 
