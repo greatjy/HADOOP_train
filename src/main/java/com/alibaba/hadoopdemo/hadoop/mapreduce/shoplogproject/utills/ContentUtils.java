@@ -7,15 +7,16 @@ import java.util.regex.Pattern;
 
 public class ContentUtils {
 
-
+    public static Pattern pattern = null;
     public static String getPageId(String url) {
         String pageId = "-";
-        if (StringUtils.isBlank(url)) {
+
+        if (StringUtils.isBlank(url) || url.equals(pageId)) {
             return pageId;
         }
 
-        Pattern pattern = Pattern.compile("topicId=[0-9]+");
-        Matcher matcher = pattern.matcher(url);
+        Matcher matcher = Pattern.compile("topicId=[0-9]+").matcher(url);
+
         if (matcher.find()) {
             pageId = matcher.group().split("topicId=")[1];
         }
