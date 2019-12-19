@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class LogParser {
 
-    public Map<String, String> parse(String log) {
+    public static Map<String, String> parse(String log) {
         Map<String,String> info = new HashMap<>();
         String ip = "-";
         String country = "-";
