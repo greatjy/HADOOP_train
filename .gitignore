@@ -3,7 +3,7 @@
 
 # Log file
 *.log
-!access.log
+!input/access/access.log
 
 # BlueJ files
 *.ctxt
@@ -25,5 +25,6 @@ hs_err_pid*
 .idea/workspace.xml
 output/
 hadoop_train.iml
-input/trackinfo_20130721.data
+input/eshop_project
+ip/
 
