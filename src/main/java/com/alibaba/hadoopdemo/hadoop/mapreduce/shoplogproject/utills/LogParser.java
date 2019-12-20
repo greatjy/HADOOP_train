@@ -14,23 +14,25 @@ public class LogParser {
         String country = "-";
         String province = "-";
         String city = "-";
-        if(!(log == null || log == "")){
-            String[] splitData = log.split("\001");
+        String time = "-";
+        String pageId = "-";
+        if(!(log == null || log.equals(""))){
+            String[] splitData = log.split("\t");
+            ip = splitData[0];
             url = splitData[1];
-            ip = splitData[13];
-            IPParser.RegionInfo regionInfo = IPParser.getInstance().analyseIp(ip);
-            if(regionInfo != null){
-                country = regionInfo.getCountry();
-                province = regionInfo.getProvince();
-                city = regionInfo.getCity();
-            }
+            time = splitData[2];
+            country = splitData[3];
+            province = splitData[4];
+            city = splitData[5];
+            pageId = splitData[6];
         }
         info.put("ip",ip);
         info.put("country",country);
         info.put("province", province);
         info.put("city", city);
         info.put("url", url);
-
+        info.put("time", time);
+        info.put("pageId", pageId);
         return info;
 
     }
